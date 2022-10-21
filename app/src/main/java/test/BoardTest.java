@@ -3,12 +3,11 @@ package test;
 
 
 import chess.piece.Color;
-import chess.position.Board;
-import chess.position.Coordinate;
-import chess.position.ClassicBoard;
-import chess.position.Position;
+import chess.position.*;
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.HashSet;
 
 import static chess.piece.PieceFactory.createRook;
 
@@ -17,7 +16,7 @@ public class BoardTest {
 
     @Test
     public void emptyBoard(){
-        Board board = new ClassicBoard();
+        Board board = new ClassicBoard(new ClassicValidator(new HashSet<>()));
         for (Position actualPosition : board.getActualPositions()) {
             Assert.assertNull(actualPosition.getPiece());
         }
@@ -25,7 +24,7 @@ public class BoardTest {
 
     @Test
     public void testDefaultBoard(){
-        Board board = new ClassicBoard();
+        Board board = new ClassicBoard(new ClassicValidator(new HashSet<>()));
         board.addDefaultBoardPieces();
         int rookCount = 0;
         for (Position actualPosition : board.getActualPositions()) {

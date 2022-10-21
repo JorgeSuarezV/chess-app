@@ -1,19 +1,17 @@
 package chess.position;
 
-import chess.piece.Color;
 import chess.piece.Piece;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
-import static chess.piece.PieceFactory.*;
-
-public class ClassicBoard implements Board {
+public class TestBoard implements Board {
     private final List<List<Position>> history;
     private final Validator validator;
 
-    public ClassicBoard(Validator validator) {
+    public TestBoard(Validator validator) {
         this.validator = validator;
         List<List<Position>> history1 = new ArrayList<>();
         history1.add(generatePositions());
@@ -45,34 +43,15 @@ public class ClassicBoard implements Board {
 
     @Override
     public void addDefaultBoardPieces() {
-        addPiece(new Coordinate(0,0), createRook(Color.WHITE));
-        addPiece(new Coordinate(7,0), createRook(Color.WHITE));
-        addPiece(new Coordinate(0,7), createRook(Color.BLACK));
-        addPiece(new Coordinate(7,7), createRook(Color.BLACK));
+    }
 
-        addPiece(new Coordinate(1,0), createKnight(Color.WHITE));
-        addPiece(new Coordinate(6,0), createKnight(Color.WHITE));
-        addPiece(new Coordinate(6,7), createKnight(Color.BLACK));
-        addPiece(new Coordinate(1,7), createKnight(Color.BLACK));
-
-        addPiece(new Coordinate(2, 0), createBishop(Color.WHITE));
-        addPiece(new Coordinate(5, 0), createBishop(Color.WHITE));
-        addPiece(new Coordinate(2,7), createBishop(Color.BLACK));
-        addPiece(new Coordinate(5,7), createBishop(Color.BLACK));
-
-        addPiece(new Coordinate(3, 0), createQueen(Color.WHITE));
-        addPiece(new Coordinate(3, 7), createQueen(Color.BLACK));
-
-        addPiece(new Coordinate(4, 0), createKing(Color.WHITE));
-        addPiece(new Coordinate(4, 7), createKing(Color.BLACK));
-
-        for (int i = 0; i < 8; i++) {
-            addPiece(new Coordinate(i, 1), createPawn(Color.WHITE));
-            addPiece(new Coordinate(i, 6), createPawn(Color.BLACK));
+    public void addPieces(Map<Coordinate, Piece> map) {
+        for (Coordinate coordinate : map.keySet()) {
+            addPiece(coordinate, map.get(coordinate));
         }
     }
 
-    public String makeMove(Move move) {  // TODO validator class?
+    public String makeMove(Move move) { // TODO move to Game class
         String result = validator.checkMove(this, move);
         if (result.equals("ok")) {
             movePiece(move);
@@ -83,15 +62,13 @@ public class ClassicBoard implements Board {
 
     private void addPiece(Coordinate coordinate, Piece piece){
         for (Position position : history.get(history.size()-1)) {
-            if (position.getCoordinate().compareTo(coordinate) == 1) continue;
-            else position.setPiece(piece);
+            if (position.getCoordinate().compareTo(coordinate) != 1) position.setPiece(piece);
         }
     }
 
     void movePiece(Move move){
-        List<Position> actualPositions = getActualPositions();
-        Position fromPosition = getPosition(actualPositions, move.getFrom());
-        Position toPostion = getPosition(actualPositions, move.getTo());
+        Position fromPosition = getPosition(getActualPositions(), move.getFrom());
+        Position toPostion = getPosition(getActualPositions(), move.getTo());
         toPostion.setPiece(fromPosition.setPiece(null));
         history.add(getActualPositions());
     }
