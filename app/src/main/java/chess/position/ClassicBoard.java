@@ -1,13 +1,13 @@
-package position;
+package chess.position;
 
-import piece.Color;
-import piece.Piece;
+import chess.piece.Color;
+import chess.piece.Piece;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static piece.PieceFactory.createRook;
+import static chess.piece.PieceFactory.*;
 
 public class DefaultBoard implements Board {
     private final List<List<Position>> history;
@@ -39,7 +39,7 @@ public class DefaultBoard implements Board {
             if (position.getY() == coordinate.getY() && position.getX() == coordinate.getX())
                 return position;
         }
-        return null; // position not in board
+        return null; // chess.position not in board
     }
 
     @Override
@@ -48,6 +48,12 @@ public class DefaultBoard implements Board {
         addPiece(new Coordinate(7,0), createRook(Color.WHITE));
         addPiece(new Coordinate(0,7), createRook(Color.BLACK));
         addPiece(new Coordinate(7,7), createRook(Color.BLACK));
+        addPiece(new Coordinate(2, 0), createBishop(Color.WHITE));
+        addPiece(new Coordinate(5, 0), createBishop(Color.WHITE));
+        addPiece(new Coordinate(2,7), createBishop(Color.BLACK));
+        addPiece(new Coordinate(5,7), createBishop(Color.BLACK));
+        addPiece(new Coordinate(3, 0), createQueen(Color.WHITE));
+        addPiece(new Coordinate(3, 7), createQueen(Color.BLACK));
     }
 
     public String makeMove(Move move) {  // TODO validator class?
