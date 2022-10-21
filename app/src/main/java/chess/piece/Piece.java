@@ -1,6 +1,6 @@
-package piece;
+package chess.piece;
 
-import movement.MovementEvaluator;
+import chess.movement.MovementEvaluator;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;

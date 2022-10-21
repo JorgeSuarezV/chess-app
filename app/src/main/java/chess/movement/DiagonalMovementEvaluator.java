@@ -8,7 +8,7 @@ import chess.position.Position;
 import java.util.HashSet;
 import java.util.Set;
 
-public class DiagonalMovementValidator implements MovementEvaluator{
+public class DiagonalMovementEvaluator implements MovementEvaluator{
 
     private Set<MovementEvaluator> movementEvaluators = new HashSet<>();
 
@@ -31,24 +31,32 @@ public class DiagonalMovementValidator implements MovementEvaluator{
         int directionY = (toY - fromY) / (max - min);
 
         //Check if there is a chess.piece in the way
-        for (int i = 1; i < max ; i++) {
+        for (int i = 1; i <= Math.abs(fromX-toX) ; i++) {
             Position position = board.getPosition(new Coordinate(fromX + i * directionX, fromY + i * directionY));
-            if (position.getPiece() !=null) {
+            if (position.getCoordinate().compareTo(move.getTo()) == 0) return reachedPosition(board, move);;
+            if (position.getPiece() != null) {
                 return "invalid move";
             }
         }
-        return reachedPosition(board, move);
+        return "invalid move";
     }
 
     public String reachedPosition(Board board, Move move) {
-//        if (board.getPosition(move.getCoordinate()).getPiece() == null) {
-//            return checkValidMoveWithEvaluators(board, move);
-//        }
-//        else if (board.getPosition(coordinate).getPiece().isTakeable()) {
-//            return checkValidMoveWithEvaluators(board, move);
-//        }
-//        else
-            return "invalid move";
+        if (board.getPosition(move.getTo()).getPiece() == null) {
+            return checkValidMoveWithEvaluators(board, move);
+        }
+        else if (board.getPosition(move.getTo()).getPiece().isTakeable(board.getPosition(move.getFrom()).getPiece())) {
+            return checkValidMoveWithEvaluators(board, move);
+        }
+        else return "invalid move";
+    }
+
+    private String checkValidMoveWithEvaluators(Board board, Move move){
+        for (MovementEvaluator movementEvaluator : movementEvaluators) {
+            String result = movementEvaluator.isValidMove(board, move);
+            if (!result.equals("ok")) return result;
+        }
+        return "ok";
     }
 
     @Override

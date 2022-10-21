@@ -1,8 +1,8 @@
-package movement;
+package chess.movement;
 
-import position.Board;
-import position.Coordinate;
-import position.Move;
+import chess.position.Board;
+import chess.position.Coordinate;
+import chess.position.Move;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -20,17 +20,17 @@ public class VerticalMovementEvaluator implements MovementEvaluator {
         Coordinate coordinate;
         if (move.getFrom().getY() < move.getTo().getY()) {
             coordinate = move.getFrom().addYOne();
-            while (coordinate.compareTo(move.getTo()) != 0 && board.getPosition(coordinate).getPiece() != null) {
+            while (coordinate.compareTo(move.getTo()) != 0 && board.getPosition(coordinate).getPiece() == null) {
                 coordinate = coordinate.addYOne();
             }
-            return reachedPosition(board, coordinate, move);
         } else {
             coordinate = move.getFrom().takeYOne();
-            while (coordinate.compareTo(move.getTo()) != 0 && board.getPosition(coordinate).getPiece() != null) {
+            while (coordinate.compareTo(move.getTo()) != 0 && board.getPosition(coordinate).getPiece() == null) {
                 coordinate = coordinate.takeYOne();
             }
         }
-            return reachedPosition(board, coordinate, move);
+        if (coordinate.compareTo(move.getTo())!= 0) return "invalid move";
+        return reachedPosition(board, move);
     }
 
 
@@ -49,11 +49,11 @@ public class VerticalMovementEvaluator implements MovementEvaluator {
 //        return board.getPosition(positionEvaluated).getPiece().isTakeable();
 
 
-    public String reachedPosition(Board board, Coordinate coordinate, Move move) {
-        if (board.getPosition(coordinate).getPiece() == null) {
+    public String reachedPosition(Board board, Move move) {
+        if (board.getPosition(move.getTo()).getPiece() == null) {
             return checkValidMoveWithEvaluators(board, move);
         }
-        else if (board.getPosition(coordinate).getPiece().isTakeable()) {
+        else if (board.getPosition(move.getTo()).getPiece().isTakeable(board.getPosition(move.getFrom()).getPiece())) {
             return checkValidMoveWithEvaluators(board, move);
         }
         else return "invalid move";

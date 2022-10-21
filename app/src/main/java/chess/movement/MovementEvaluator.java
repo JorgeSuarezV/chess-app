@@ -1,7 +1,7 @@
-package movement;
+package chess.movement;
 
-import position.Board;
-import position.Move;
+import chess.position.Board;
+import chess.position.Move;
 
 public interface MovementEvaluator {
     String isValidMove(Board board, Move move);

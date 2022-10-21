@@ -1,11 +1,11 @@
-package main.java;
+package chess;
 
-import piece.Color;
-import piece.Piece;
-import position.Coordinate;
-import position.Position;
+import chess.piece.Color;
+import chess.piece.Piece;
+import chess.position.Coordinate;
+import chess.position.Position;
 
-import static piece.PieceFactory.createRook;
+import static chess.piece.PieceFactory.createRook;
 
 public class sandbox {
     public static void main(String[] args) {

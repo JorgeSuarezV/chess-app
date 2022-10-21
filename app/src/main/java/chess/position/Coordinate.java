@@ -1,4 +1,4 @@
-package position;
+package chess.position;
 
 import org.jetbrains.annotations.NotNull;
 

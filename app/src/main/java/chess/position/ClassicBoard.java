@@ -9,11 +9,11 @@ import java.util.List;
 
 import static chess.piece.PieceFactory.*;
 
-public class DefaultBoard implements Board {
+public class ClassicBoard implements Board {
     private final List<List<Position>> history;
     private final Validator validator = new DefaultValidator();
 
-    public DefaultBoard() {
+    public ClassicBoard() {
         List<List<Position>> history1 = new ArrayList<>();
         history1.add(generatePositions());
         history = history1;

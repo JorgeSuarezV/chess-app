@@ -1,4 +1,4 @@
-package chess.movement;
+package chess.game;
 
 import chess.piece.Color;
 

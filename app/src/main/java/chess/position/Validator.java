@@ -1,4 +1,4 @@
-package position;
+package chess.position;
 
 public interface Validator {
 

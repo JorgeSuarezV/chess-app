@@ -1,7 +1,7 @@
-package position;
+package chess.position;
 
-import movement.MovementEvaluator;
-import piece.Piece;
+import chess.movement.MovementEvaluator;
+import chess.piece.Piece;
 
 public class DefaultValidator implements Validator{
 
@@ -14,7 +14,7 @@ public class DefaultValidator implements Validator{
         if (fromPosition == null || toPosition == null) return "Not in bounds";
 
         Piece piece = fromPosition.getPiece();
-        if (piece == null) return "Not moving a piece";
+        if (piece == null) return "Not moving a chess.piece";
 
         boolean atLeastOneValid = false;
         for (MovementEvaluator summativeMovementEvaluator : piece.getSummativeMovementEvaluators()) {

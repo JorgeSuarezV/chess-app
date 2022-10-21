@@ -1,6 +1,6 @@
-package position;
+package chess.position;
 
-import piece.Piece;
+import chess.piece.Piece;
 import org.jetbrains.annotations.NotNull;
 
 public class Position implements Comparable<Position>{
@@ -30,7 +30,7 @@ public class Position implements Comparable<Position>{
     }
 
     public Piece getPiece() {
-        return piece; // null when no piece found
+        return piece; // null when no chess.piece found
     }
 
     public Piece setPiece(Piece piece) {

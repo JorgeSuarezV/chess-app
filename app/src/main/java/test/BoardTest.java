@@ -1,20 +1,23 @@
 package test;
 
-import main.java.piece.Color;
-import main.java.position.Board;
-import main.java.position.Coordinate;
-import main.java.position.DefaultBoard;
-import main.java.position.Position;
+
+
+import chess.piece.Color;
+import chess.position.Board;
+import chess.position.Coordinate;
+import chess.position.ClassicBoard;
+import chess.position.Position;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static main.java.piece.PieceFactory.createRook;
+import static chess.piece.PieceFactory.createRook;
+
 
 public class BoardTest {
 
     @Test
     public void emptyBoard(){
-        Board board = new DefaultBoard();
+        Board board = new ClassicBoard();
         for (Position actualPosition : board.getActualPositions()) {
             Assert.assertNull(actualPosition.getPiece());
         }
@@ -22,7 +25,7 @@ public class BoardTest {
 
     @Test
     public void testDefaultBoard(){
-        Board board = new DefaultBoard();
+        Board board = new ClassicBoard();
         board.addDefaultBoardPieces();
         int rookCount = 0;
         for (Position actualPosition : board.getActualPositions()) {
