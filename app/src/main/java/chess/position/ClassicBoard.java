@@ -90,7 +90,6 @@ public class ClassicBoard implements Board {
     private void addPiece(Coordinate coordinate, Piece piece){
         for (Position position : history.get(history.size()-1)) {
             if (position.getCoordinate().compareTo(coordinate) == 0) position.setPiece(piece);
-            return;
         }
     }
 
