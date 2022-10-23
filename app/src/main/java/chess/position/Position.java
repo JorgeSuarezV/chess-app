@@ -3,7 +3,7 @@ package chess.position;
 import chess.piece.Piece;
 import org.jetbrains.annotations.NotNull;
 
-public class Position implements Comparable<Position>{
+public class Position implements Comparable<Position>, Cloneable{
 
     private final Coordinate coordinate;
     private Piece piece = null;
@@ -17,6 +17,10 @@ public class Position implements Comparable<Position>{
         this.piece = piece;
     }
 
+    public Position clone(){
+        if (piece == null) return new Position(coordinate, null);
+        return new Position(coordinate, piece);
+    }
     public int getX() {
         return coordinate.getX();
     }

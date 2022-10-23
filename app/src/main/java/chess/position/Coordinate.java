@@ -12,19 +12,6 @@ public class Coordinate implements Comparable<Coordinate>{
         this.y = y;
     }
 
-    public Coordinate addXOne(){
-        return new Coordinate(x + 1 , y);
-    }
-    public Coordinate takeXOne(){
-        return new Coordinate(x - 1, y);
-    }
-    public Coordinate addYOne(){
-        return new Coordinate(x, y + 1);
-    }
-    public Coordinate takeYOne(){
-        return new Coordinate(x, y - 1);
-    }
-
 
     public int getX() {
         return x;

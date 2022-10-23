@@ -1,5 +1,6 @@
 package chess.movement;
 
+import chess.exception.*;
 import chess.position.Board;
 import chess.position.Move;
 
@@ -12,16 +13,20 @@ public class LimitMovementEvaluator extends AbstractEvaluator implements Movemen
     }
 
     @Override
-    public String isValidMove(Board board, Move move) {
-        if (move.getFrom().compareTo(move.getTo()) == 0) return "invalid move";
+    public boolean isValidMove(Board board, Move move) throws MovementException {
 
         int fromX = move.getFrom().getX();
         int fromY = move.getFrom().getY();
         int toX = move.getTo().getX();
         int toY = move.getTo().getY();
 
-        if (Math.abs(fromX - toX) <= limit && Math.abs(fromY - toY) <= limit ) return "ok";
-        else return "invalid move";
+        if (Math.abs(fromX - toX) <= limit && Math.abs(fromY - toY) <= limit ) return true;
+        else throw new MovementException("The piece can not move like that");
+    }
+
+    @Override
+    public boolean isThreatening(Board board, Move move) throws MovementException {
+        return isValidMove(board, move);
     }
 
     @Override

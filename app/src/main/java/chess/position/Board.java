@@ -4,13 +4,16 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public interface Board {
+public interface Board extends Cloneable {
 
     @Nullable Position getPosition(Coordinate coordinate);
 
-    void addDefaultBoardPieces();
+    Board clone();
 
-    String makeMove(Move move);
+    void addDefaultBoardPieces();
+    void revertMove(Move move);
+
+    void movePiece(Move move);
 
     List<List<Position>> getHistory();
 

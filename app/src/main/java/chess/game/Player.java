@@ -1,11 +1,12 @@
 package chess.game;
 
-import chess.piece.Color;
+
+import edu.austral.dissis.chess.gui.PlayerColor;
 
 public class Player {
-    final Color color;
+    final PlayerColor color;
 
-    public Player(Color color) {
+    public Player(PlayerColor color) {
         this.color = color;
     }
 }

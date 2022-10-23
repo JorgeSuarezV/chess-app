@@ -1,5 +1,6 @@
 package chess.movement;
 
+import chess.exception.*;
 import chess.piece.Piece;
 import chess.position.Board;
 import chess.position.Coordinate;
@@ -17,13 +18,18 @@ public class MoveQuantityMovementEvaluator extends AbstractEvaluator implements 
     }
 
     @Override
-    public String isValidMove(Board board, Move move) {
+    public boolean isValidMove(Board board, Move move) throws NotMovingAPieceException, MovementException {
         Position position = board.getPosition(move.getFrom());
-        if (position == null) return "invalid move";
-        Piece piece = position.getPiece(); // TODO iterar historial para buscar posicion y comparar con actual y si es diferente sumar 1 al contador
-        if (piece == null) return "invalid move";
-        if (!(countMovements(board, move.getFrom(), piece) <= maxMove)) return "invalid move";
-        return "ok";
+        if (position == null) throw new NotMovingAPieceException("invalid starting position");
+        Piece piece = position.getPiece();
+        if (piece == null) throw new NotMovingAPieceException("invalid starting position");
+        if (!(countMovements(board, move.getFrom(), piece) <= maxMove)) throw new MovementException("The piece can not move like that");
+        return true;
+    }
+
+    @Override
+    public boolean isThreatening(Board board, Move move) throws MovementException, NotMovingAPieceException {
+        return isValidMove(board, move);
     }
 
 
