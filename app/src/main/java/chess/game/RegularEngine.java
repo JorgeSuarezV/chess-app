@@ -27,7 +27,7 @@ public class RegularEngine implements GameEngine{
         this.player1 = new Player(PlayerColor.WHITE);
         this.player2 = new Player(PlayerColor.BLACK);
         this.board = new ClassicBoard(8);
-        validators.add(new ClassicMoveValidator(new HashSet<>()));
+        validators.add(new ClassicMoveValidator());
         validators.add(new PromotionValidator(PieceType.PAWN));
         validators.add(new WinValidator());
      }

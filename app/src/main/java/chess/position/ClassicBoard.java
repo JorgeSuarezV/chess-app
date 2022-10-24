@@ -7,6 +7,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import static chess.piece.PieceFactory.*;
 import static chess.util.Cloner.cloneBoard;
@@ -93,11 +94,13 @@ public class ClassicBoard implements Board {
         }
     }
 
-    public void movePiece(Move move){
+    public void movePiece(Set<Move> moves){
         List<Position> actualPositions = getActualPositions();
-        Position fromPosition = getPosition(actualPositions, move.getFrom());
-        Position toPostion = getPosition(actualPositions, move.getTo());
-        toPostion.setPiece(fromPosition.setPiece(null));
+        for (Move move : moves) {
+            Position fromPosition = getPosition(actualPositions, move.getFrom());
+            Position toPostion = getPosition(actualPositions, move.getTo());
+            toPostion.setPiece(fromPosition.setPiece(null));
+        }
         history.add(actualPositions);
     }
 

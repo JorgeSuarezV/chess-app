@@ -10,15 +10,16 @@ import chess.position.Position;
 import edu.austral.dissis.chess.gui.PlayerColor;
 
 import java.util.List;
+import java.util.Set;
 
 public class GotCheckedMovementEvaluator implements MovementEvaluator{
 
     @Override
-    public boolean isValidMove(Board board, Move move) throws SelfCheckException, MovementException, OutOfBoundsException {
+    public Set<Move> isValidMove(Board board, Move move, Set<Move> moves) throws SelfCheckException, MovementException, OutOfBoundsException {
         Board board1 = board.clone();
-        board1.movePiece(move);
+        board1.movePiece(moves);
         Position position = board1.getPosition(move.getTo());
-        if (position == null) throw new OutOfBoundsException("From or To position OOB");
+        if (position == null) throw new OutOfBoundsException();
         Piece piece = position.getPiece();
         if (piece == null) throw new MovementException("This piece is not yours");
         PlayerColor playerColor = piece.getPlayerColor();
@@ -38,15 +39,16 @@ public class GotCheckedMovementEvaluator implements MovementEvaluator{
                 for (MovementEvaluator summativeMovementEvaluator : actualPosition.getPiece().getMovementEvaluators()) { // check if threat
                     try {
                         if (summativeMovementEvaluator.isThreatening(board1, new Move(actualPosition.getCoordinate(), coordinate)))
-                            throw new SelfCheckException("can not put your king in check");
+                            throw new SelfCheckException();
                     }catch (Exception e){
                         if (e.getClass() == SelfCheckException.class)
-                            throw new SelfCheckException("can not leave your king in check");
+                            throw new SelfCheckException();
                     }
                 }
             }
         }
-        return true;
+        moves.add(move);
+        return moves;
     }
 
     @Override

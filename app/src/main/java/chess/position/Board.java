@@ -3,6 +3,7 @@ package chess.position;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Set;
 
 public interface Board extends Cloneable {
 
@@ -13,7 +14,7 @@ public interface Board extends Cloneable {
     void addDefaultBoardPieces();
     void revertMove(Move move);
 
-    void movePiece(Move move);
+    void movePiece(Set<Move> moves);
 
     List<List<Position>> getHistory();
 

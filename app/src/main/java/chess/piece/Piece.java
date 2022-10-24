@@ -8,12 +8,12 @@ import java.util.Set;
 
 public class Piece implements Comparable<Piece>,Cloneable {
 
-    private final Set<MovementEvaluator> movementEvaluators;
-    private final Set<MovementEvaluator> illegalMovementEvaluators;
-    private final boolean takeable;
-    private final String name;
-    private final PlayerColor color;
-    private final PieceType type;
+    private Set<MovementEvaluator> movementEvaluators;
+    private Set<MovementEvaluator> illegalMovementEvaluators;
+    private boolean takeable;
+    private String name;
+    private PlayerColor color;
+    private PieceType type;
 
 
 
@@ -56,6 +56,30 @@ public class Piece implements Comparable<Piece>,Cloneable {
 
     public PlayerColor getPlayerColor() {
         return color;
+    }
+
+    public void setType(PieceType type) {
+        this.type = type;
+    }
+
+    public void setMovementEvaluators(Set<MovementEvaluator> movementEvaluators) {
+        this.movementEvaluators = movementEvaluators;
+    }
+
+    public void setIllegalMovementEvaluators(Set<MovementEvaluator> illegalMovementEvaluators) {
+        this.illegalMovementEvaluators = illegalMovementEvaluators;
+    }
+
+    public void setTakeable(boolean takeable) {
+        this.takeable = takeable;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setColor(PlayerColor color) {
+        this.color = color;
     }
 
     public Set<MovementEvaluator> getIllegalMovementEvaluators() {

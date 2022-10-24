@@ -74,6 +74,8 @@ public class PieceFactory {
         evaluators.add(new UnidirectionalMovementEvaluator(-1,1));
         evaluators.add(new UnidirectionalMovementEvaluator(-1,-1));
         evaluators.add(new UnidirectionalMovementEvaluator(1,-1));
+        if (color == PlayerColor.WHITE) evaluators.add(new CastleMovementEvaluator(0));
+        else evaluators.add(new CastleMovementEvaluator(7));
         for (MovementEvaluator movementEvaluator : evaluators) {
             movementEvaluator.addMovementEvaluator(new LimitMovementEvaluator(1));
         }

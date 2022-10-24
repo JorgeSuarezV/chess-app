@@ -11,7 +11,7 @@ import java.util.List;
 
 public class WinValidator implements Validator{
 
-    Validator validator = new ClassicMoveValidator(new HashSet<>());
+    Validator validator = new ClassicMoveValidator();
     @Override
     public MoveResult checkMove(Board board, Move move, PlayerColor currentPlayerColor) {
         board = board.clone();

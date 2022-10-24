@@ -6,6 +6,8 @@ import chess.position.Coordinate;
 import chess.position.Move;
 import chess.position.Position;
 
+import java.util.Set;
+
 public class VariableJumpingMovementEvaluator extends AbstractEvaluator implements MovementEvaluator{
     int[][] movements;
 
@@ -14,21 +16,21 @@ public class VariableJumpingMovementEvaluator extends AbstractEvaluator implemen
     }
 
     @Override
-    public boolean isValidMove(Board board, Move move) throws OutOfBoundsException, NotMovingAPieceException, MovementException, CannotTakePieceException, PathBlockedException, SelfCheckException {
-        if (VariableJumpingLogic(board, move)) return reachedPosition(board, move);
-        throw new MovementException("The piece can not move like that");
+    public Set<Move> isValidMove(Board board, Move move, Set<Move> moves) throws OutOfBoundsException, NotMovingAPieceException, MovementException, CannotTakePieceException, PathBlockedException, SelfCheckException {
+        if (VariableJumpingLogic(board, move)) return reachedPosition(board, move, moves);
+        throw new MovementException();
     }
 
     @Override
     public boolean isThreatening(Board board, Move move) throws MovementException, NotMovingAPieceException, OutOfBoundsException, CannotTakePieceException, PathBlockedException, SelfCheckException {
         if (VariableJumpingLogic(board, move)) return checkTargetMoveWithEvaluators(board, move);
-        throw new MovementException("The piece can not move like that");
+        throw new MovementException();
     }
 
     private boolean VariableJumpingLogic(Board board, Move move) throws OutOfBoundsException {
         Position fromPosition = board.getPosition(move.getFrom());
         Position toPosition = board.getPosition(move.getTo());
-        if (fromPosition == null || toPosition == null || fromPosition.getPiece() == null) throw new OutOfBoundsException("From or To position OOB");
+        if (fromPosition == null || toPosition == null || fromPosition.getPiece() == null) throw new OutOfBoundsException();
 
         int xFrom = move.getFrom().getX();
         int yFrom = move.getFrom().getY();
