@@ -7,7 +7,7 @@ import edu.austral.dissis.chess.gui.MoveResult;
 import edu.austral.dissis.chess.gui.NewGameState;
 import edu.austral.dissis.chess.gui.PlayerColor;
 
-import static chess.Adapter.getChessPieceList;
+import static adapter.Adapter.getChessPieceList;
 import static chess.piece.PieceFactory.createQueen;
 
 public class PromotionValidator implements Validator{
