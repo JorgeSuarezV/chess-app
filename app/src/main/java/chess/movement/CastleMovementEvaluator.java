@@ -44,7 +44,7 @@ public class CastleMovementEvaluator extends AbstractEvaluator implements Moveme
                 return moves;
             }
         }else if (xMove == 2){
-            Coordinate rookFrom = new Coordinate(board.getSize() -1, yCoordinate);
+            Coordinate rookFrom = new Coordinate(board.getWidth() -1, yCoordinate);
             Position rookTo = board.getPosition(new Coordinate(fromPosition.getCoordinate().getX() + 1, yCoordinate));
             Position position = board.getPosition(rookFrom);
             if (rookTo != null && rookTo.getPiece() != null) throw new MovementException();

@@ -35,4 +35,18 @@ public class PieceFactory {
     public static Piece createPawn(PlayerColor color){
         return new Piece(createPawnMovementEvaluators(color), createGeneralIllegalMovementEvaluators(), true, color, "P" + id++, PieceType.PAWN);
     }
+
+    public static Piece createChancellor(PlayerColor color){
+        return new Piece(createChancellorMovementEvaluators(), createGeneralIllegalMovementEvaluators(), true, color, "C" + id++, PieceType.CHANCELLOR);
+    }
+
+    public static Piece createArchbishop(PlayerColor color){
+        return new Piece(createArchbishopMovementEvaluators(), createGeneralIllegalMovementEvaluators(), true, color, "C" + id++, PieceType.ARCHBISHOP);
+    }
+
+
+
+    public static Piece createAntiPawn(PlayerColor color){
+        return new Piece(createAntiPawnMovementEvaluators(color), createGeneralIllegalMovementEvaluators(), true,color, "A" + id++, PieceType.KING);
+    }
 }

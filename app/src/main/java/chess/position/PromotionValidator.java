@@ -22,7 +22,7 @@ public class PromotionValidator implements Validator{
     public MoveResult checkMove(Board board, Move move, PlayerColor currentPlayerColor) throws OutOfBoundsException {
         Position toPosition = board.getPosition(move.getTo());
         if (toPosition == null) throw new OutOfBoundsException();
-        if ((currentPlayerColor == PlayerColor.WHITE && toPosition.getY() == 7) ||
+        if ((currentPlayerColor == PlayerColor.WHITE && toPosition.getY() == board.getHeight()-1) ||
         currentPlayerColor == PlayerColor.BLACK && toPosition.getY() == 0){
             if (toPosition.getPiece().getType() == from){
                 convertToQueen(toPosition.getPiece(), currentPlayerColor);

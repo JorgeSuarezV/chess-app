@@ -1,5 +1,6 @@
 package chess.movement;
 
+import chess.piece.Piece;
 import edu.austral.dissis.chess.gui.Move;
 import edu.austral.dissis.chess.gui.PlayerColor;
 
@@ -63,23 +64,58 @@ public class MovementEvaluatorSetFactory {
         evaluators.add(new VariableJumpingMovementEvaluator(-2,-1));
         return evaluators;
     }
-        public static Set<MovementEvaluator> createPawnMovementEvaluators(PlayerColor color){
+
+
+
+    public static Set<MovementEvaluator> createPawnMovementEvaluators(PlayerColor color){
+    int vectorY = 1;
+    if (color == PlayerColor.BLACK) vectorY = -1;
+    MovementEvaluator evaluator1 = new UnidirectionalMovementEvaluator(1, vectorY)
+            .addMovementEvaluator(new LimitMovementEvaluator(1))
+            .addMovementEvaluator(new TakeMovementEvaluator(true));
+    MovementEvaluator evaluator2 = new UnidirectionalMovementEvaluator(-1, vectorY)
+            .addMovementEvaluator(new LimitMovementEvaluator(1))
+            .addMovementEvaluator(new TakeMovementEvaluator(true));
+    MovementEvaluator evaluator3 = new UnidirectionalMovementEvaluator(0, vectorY)
+            .addMovementEvaluator(new LimitMovementEvaluator(2))
+            .addMovementEvaluator(new TakeMovementEvaluator(false))
+            .addMovementEvaluator(new MoveQuantityMovementEvaluator(0));
+    MovementEvaluator evaluator4 = new UnidirectionalMovementEvaluator(0, vectorY)
+            .addMovementEvaluator(new TakeMovementEvaluator(false))
+            .addMovementEvaluator(new LimitMovementEvaluator(1));
+
+    return new HashSet<>(Arrays.asList(evaluator1, evaluator2, evaluator3, evaluator4));
+    }
+
+    public static Set<MovementEvaluator> createArchbishopMovementEvaluators(){
+        Set<MovementEvaluator> evaluators = new HashSet<>();
+        evaluators.addAll(createKnightMovementEvaluators());
+        evaluators.addAll(createBishopMovementEvaluators());
+        return evaluators;
+    }
+
+    public static Set<MovementEvaluator> createChancellorMovementEvaluators(){
+        Set<MovementEvaluator> evaluators = new HashSet<>();
+        evaluators.addAll(createKnightMovementEvaluators());
+        evaluators.addAll(createRookMovementEvaluators());
+        return evaluators;
+    }
+
+
+        public static Set<MovementEvaluator> createAntiPawnMovementEvaluators(PlayerColor color){
         int vectorY = 1;
         if (color == PlayerColor.BLACK) vectorY = -1;
-        MovementEvaluator evaluator1 = new UnidirectionalMovementEvaluator(1, vectorY)
-                .addMovementEvaluator(new LimitMovementEvaluator(1))
-                .addMovementEvaluator(new TakeMovementEvaluator(true));
-        MovementEvaluator evaluator2 = new UnidirectionalMovementEvaluator(-1, vectorY)
-                .addMovementEvaluator(new LimitMovementEvaluator(1))
-                .addMovementEvaluator(new TakeMovementEvaluator(true));
-        MovementEvaluator evaluator3 = new UnidirectionalMovementEvaluator(0, vectorY)
-                .addMovementEvaluator(new LimitMovementEvaluator(2))
-                .addMovementEvaluator(new TakeMovementEvaluator(false))
-                .addMovementEvaluator(new MoveQuantityMovementEvaluator(0));
-        MovementEvaluator evaluator4 = new UnidirectionalMovementEvaluator(0, vectorY)
-                .addMovementEvaluator(new TakeMovementEvaluator(false))
-                .addMovementEvaluator(new LimitMovementEvaluator(1));
-
-        return new HashSet<>(Arrays.asList(evaluator1, evaluator2, evaluator3, evaluator4));
+        Set<MovementEvaluator> evaluators = new HashSet<>();
+        evaluators.add(new PathTakeMovementEvaluator(-3, 3*vectorY)
+                .addMovementEvaluator(new MoveQuantityMovementEvaluator(0)));
+        evaluators.add(new PathTakeMovementEvaluator(3,3*vectorY)
+                .addMovementEvaluator(new MoveQuantityMovementEvaluator(0)));
+        evaluators.add(new VariableJumpingMovementEvaluator(-1, vectorY)
+                .addMovementEvaluator(new TakeMovementEvaluator(false)));
+        evaluators.add(new VariableJumpingMovementEvaluator(1, vectorY)
+                .addMovementEvaluator(new TakeMovementEvaluator(false)));
+        evaluators.add(new VariableJumpingMovementEvaluator(0, vectorY)
+                .addMovementEvaluator(new TakeMovementEvaluator(true)));
+        return evaluators;
     }
 }

@@ -8,6 +8,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import static adapter.Adapter.castGUIMoveToMove;
 import static adapter.Adapter.getChessPieceList;
@@ -24,7 +25,7 @@ public class RegularEngine implements GameEngine{
     public RegularEngine() {
         this.player1 = new Player(PlayerColor.WHITE);
         this.player2 = new Player(PlayerColor.BLACK);
-        this.board = new ClassicBoard(8);
+        this.board = chooseGameMode();
         validators.add(new ClassicMoveValidator());
         validators.add(new PromotionValidator(PieceType.PAWN));
         validators.add(new WinValidator());
@@ -34,7 +35,7 @@ public class RegularEngine implements GameEngine{
     @Override
     public InitialState init() {
         board.addDefaultBoardPieces();
-        return new InitialState(new BoardSize(8,8), getChessPieceList(board.getActualPositions()), PlayerColor.WHITE);
+        return new InitialState(new BoardSize(board.getWidth(), board.getHeight()), getChessPieceList(board.getActualPositions()), PlayerColor.WHITE);
     }
 
     @NotNull
@@ -53,6 +54,15 @@ public class RegularEngine implements GameEngine{
         }catch (Exception e) {
             return new InvalidMove(e.getMessage());
         }
+    }
+    private Board chooseGameMode(){
+        Scanner myObj = new Scanner(System.in);
+        System.out.println("Enter game mode: \n 1 for Classic \n 2 for Capablanca");
+        int gameMode = myObj.nextInt();
+        if (gameMode == 1) return new ClassicBoard();
+        if (gameMode == 2) return new CapablancaBoard();
+        if (gameMode == 3) return new ClassicBoard();
+        return new ClassicBoard();
     }
 }
 

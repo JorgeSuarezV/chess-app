@@ -1,6 +1,5 @@
 package chess.position;
 
-
 import chess.piece.Piece;
 import edu.austral.dissis.chess.gui.PlayerColor;
 import org.jetbrains.annotations.Nullable;
@@ -13,32 +12,22 @@ import static chess.piece.PieceFactory.*;
 import static chess.util.Cloner.cloneBoard;
 import static chess.util.Cloner.clonePositionList;
 
-
-public class ClassicBoard implements Board {
+public class CapablancaBoard implements Board {
 
     private final List<List<Position>> history;
 
-    final int size = 8;
+    final int size = 10;
 
-    public ClassicBoard() {
+    public CapablancaBoard(){
         List<List<Position>> history1 = new ArrayList<>();
         history1.add(generatePositions());
-        history = history1;
+        this.history = history1;
     }
 
-    private ClassicBoard(List<List<Position>> history) {
+    private CapablancaBoard(List<List<Position>> history) {
         this.history = history;
     }
 
-    private List<Position> generatePositions() {
-        List<Position> positionList = new ArrayList<>();
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                positionList.add(new Position(i,j));
-            }
-        }
-        return positionList;
-    }
 
     public @Nullable Position getPosition(Coordinate coordinate){
         List<Position> actualState = new ArrayList<>(history.get(history.size()-1));
@@ -53,48 +42,58 @@ public class ClassicBoard implements Board {
         return null; // chess.position not in board
     }
 
+    private List<Position> generatePositions() {
+        List<Position> positionList = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                positionList.add(new Position(i,j));
+            }
+        }
+        return positionList;
+    }
+
     @Override
     public Board clone() {
-        return new ClassicBoard(cloneBoard(history));
+        return new CapablancaBoard(cloneBoard(history));
     }
 
     @Override
     public void addDefaultBoardPieces() {
         addPiece(new Coordinate(0,0), createRook(PlayerColor.WHITE));
-        addPiece(new Coordinate(7,0), createRook(PlayerColor.WHITE));
-        addPiece(new Coordinate(0,7), createRook(PlayerColor.BLACK));
-        addPiece(new Coordinate(7,7), createRook(PlayerColor.BLACK));
+        addPiece(new Coordinate(9,0), createRook(PlayerColor.WHITE));
+        addPiece(new Coordinate(0,9), createRook(PlayerColor.BLACK));
+        addPiece(new Coordinate(9,9), createRook(PlayerColor.BLACK));
 
         addPiece(new Coordinate(1,0), createKnight(PlayerColor.WHITE));
-        addPiece(new Coordinate(6,0), createKnight(PlayerColor.WHITE));
-        addPiece(new Coordinate(6,7), createKnight(PlayerColor.BLACK));
-        addPiece(new Coordinate(1,7), createKnight(PlayerColor.BLACK));
+        addPiece(new Coordinate(8,0), createKnight(PlayerColor.WHITE));
+        addPiece(new Coordinate(1,9), createKnight(PlayerColor.BLACK));
+        addPiece(new Coordinate(8,9), createKnight(PlayerColor.BLACK));
 
-        addPiece(new Coordinate(2, 0), createBishop(PlayerColor.WHITE));
-        addPiece(new Coordinate(5, 0), createBishop(PlayerColor.WHITE));
-        addPiece(new Coordinate(2,7), createBishop(PlayerColor.BLACK));
-        addPiece(new Coordinate(5,7), createBishop(PlayerColor.BLACK));
+        addPiece(new Coordinate(2,0), createArchbishop(PlayerColor.WHITE));
+        addPiece(new Coordinate(2,9), createArchbishop(PlayerColor.BLACK));
 
-        addPiece(new Coordinate(3, 0), createQueen(PlayerColor.WHITE));
-        addPiece(new Coordinate(3, 7), createQueen(PlayerColor.BLACK));
+        addPiece(new Coordinate(7,0), createChancellor(PlayerColor.WHITE));
+        addPiece(new Coordinate(7,9), createChancellor(PlayerColor.BLACK));
 
-        addPiece(new Coordinate(4, 0), createKing(PlayerColor.WHITE, this.size));
-        addPiece(new Coordinate(4, 7), createKing(PlayerColor.BLACK, this.size));
+        addPiece(new Coordinate(3,0), createBishop(PlayerColor.WHITE));
+        addPiece(new Coordinate(6,0), createBishop(PlayerColor.WHITE));
+        addPiece(new Coordinate(3,9), createBishop(PlayerColor.BLACK));
+        addPiece(new Coordinate(6,9), createBishop(PlayerColor.BLACK));
 
-        addPawns();
-    }
-    private void addPawns(){
-        for (int i = 0; i < 8; i++) {
-            addPiece(new Coordinate(i, 1), createPawn(PlayerColor.WHITE));
-            addPiece(new Coordinate(i, 6), createPawn(PlayerColor.BLACK));
+        addPiece(new Coordinate(4,0), createQueen(PlayerColor.WHITE));
+        addPiece(new Coordinate(4,9), createQueen(PlayerColor.BLACK));
+
+        addPiece(new Coordinate(5,0), createKing(PlayerColor.WHITE, getWidth()));
+        addPiece(new Coordinate(5,9), createKing(PlayerColor.BLACK, getWidth()));
+
+        for (int i = 0; i < getWidth(); i++) {
+            addPiece(new Coordinate(i,1), createPawn(PlayerColor.WHITE));
+            addPiece(new Coordinate(i,8), createPawn(PlayerColor.BLACK));
         }
-    }
 
-    public void addAntiPawnSet(){
-        for (int i = 0; i < 8; i++) {
-            addPiece(new Coordinate(i, 1), createAntiPawn(PlayerColor.WHITE));
-            addPiece(new Coordinate(i, 6), createAntiPawn(PlayerColor.BLACK));
-        }
+
+
+
     }
 
     private void addPiece(Coordinate coordinate, Piece piece){

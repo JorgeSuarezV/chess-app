@@ -19,5 +19,6 @@ public interface Board extends Cloneable {
 
     List<Position> getActualPositions();
 
-    int getSize();
+    int getHeight();
+    int getWidth();
 }
