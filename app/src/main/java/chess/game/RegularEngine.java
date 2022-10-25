@@ -7,11 +7,10 @@ import edu.austral.dissis.chess.gui.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
-import static chess.Adapter.castGUIMoveToMove;
-import static chess.Adapter.getChessPieceList;
+import static adapter.Adapter.castGUIMoveToMove;
+import static adapter.Adapter.getChessPieceList;
 
 public class RegularEngine implements GameEngine{
 

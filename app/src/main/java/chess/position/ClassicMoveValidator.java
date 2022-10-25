@@ -10,7 +10,7 @@ import edu.austral.dissis.chess.gui.PlayerColor;
 import java.util.HashSet;
 import java.util.Set;
 
-import static chess.Adapter.getChessPieceList;
+import static adapter.Adapter.getChessPieceList;
 
 public class ClassicMoveValidator implements Validator{
 

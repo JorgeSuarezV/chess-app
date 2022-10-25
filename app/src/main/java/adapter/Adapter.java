@@ -1,4 +1,4 @@
-package chess;
+package adapter;
 
 import chess.position.Coordinate;
 import chess.position.Position;
