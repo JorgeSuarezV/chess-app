@@ -1,6 +1,7 @@
 package chess.movement;
 
-import chess.exception.*;
+import chess.exception.MovementException;
+import chess.exception.NotMovingAPieceException;
 import chess.piece.Piece;
 import chess.position.Board;
 import chess.position.Coordinate;

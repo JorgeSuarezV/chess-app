@@ -3,9 +3,11 @@ package chess.movement;
 import chess.exception.*;
 import chess.piece.Piece;
 import chess.piece.PieceType;
-import chess.position.*;
+import chess.position.Board;
+import chess.position.Coordinate;
+import chess.position.Move;
+import chess.position.Position;
 
-import java.util.HashSet;
 import java.util.Set;
 
 public class CastleMovementEvaluator extends AbstractEvaluator implements MovementEvaluator{

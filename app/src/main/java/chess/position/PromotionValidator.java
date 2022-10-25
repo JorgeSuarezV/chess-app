@@ -1,6 +1,6 @@
 package chess.position;
 
-import chess.exception.*;
+import chess.exception.OutOfBoundsException;
 import chess.piece.Piece;
 import chess.piece.PieceType;
 import edu.austral.dissis.chess.gui.MoveResult;

@@ -1,11 +1,12 @@
 package chess.movement;
 
-import chess.exception.*;
+import chess.exception.CannotTakePieceException;
+import chess.exception.MovementException;
+import chess.exception.OutOfBoundsException;
 import chess.position.Board;
 import chess.position.Move;
 import chess.position.Position;
 
-import java.util.HashSet;
 import java.util.Set;
 
 public class TakeMovementEvaluator extends AbstractEvaluator implements MovementEvaluator{

@@ -1,6 +1,6 @@
 package chess.movement;
 
-import chess.exception.*;
+import chess.exception.MovementException;
 import chess.position.Board;
 import chess.position.Move;
 

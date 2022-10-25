@@ -1,12 +1,10 @@
 package chess.position;
 
-import chess.exception.*;
 import chess.piece.Piece;
 import edu.austral.dissis.chess.gui.GameOver;
 import edu.austral.dissis.chess.gui.MoveResult;
 import edu.austral.dissis.chess.gui.PlayerColor;
 
-import java.util.HashSet;
 import java.util.List;
 
 public class WinValidator implements Validator{

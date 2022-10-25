@@ -1,6 +1,8 @@
 package chess.movement;
 
-import chess.exception.*;
+import chess.exception.MovementException;
+import chess.exception.OutOfBoundsException;
+import chess.exception.SelfCheckException;
 import chess.piece.Piece;
 import chess.piece.PieceType;
 import chess.position.Board;
