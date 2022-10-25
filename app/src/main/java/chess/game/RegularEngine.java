@@ -48,7 +48,7 @@ public class RegularEngine implements GameEngine{
                 if (moveResult1 != null) moveResult = moveResult1;
             }
 
-//        currentPlayerColor = currentPlayerColor == PlayerColor.WHITE ? PlayerColor.BLACK : PlayerColor.WHITE;
+        currentPlayerColor = currentPlayerColor == PlayerColor.WHITE ? PlayerColor.BLACK : PlayerColor.WHITE;
         return moveResult;
         }catch (Exception e) {
             return new InvalidMove(e.getMessage());
