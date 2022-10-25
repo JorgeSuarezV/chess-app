@@ -105,11 +105,6 @@ public class ClassicBoard implements Board {
     }
 
     @Override
-    public void revertMove(Move move) {
-        history.remove(history.size()-1);
-    }
-
-    @Override
     public List<List<Position>> getHistory() {
         return history;
     }
