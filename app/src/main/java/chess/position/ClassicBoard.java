@@ -79,8 +79,8 @@ public class ClassicBoard implements Board {
         addPiece(new Coordinate(3, 0), createQueen(PlayerColor.WHITE));
         addPiece(new Coordinate(3, 7), createQueen(PlayerColor.BLACK));
 
-        addPiece(new Coordinate(4, 0), createKing(PlayerColor.WHITE));
-        addPiece(new Coordinate(4, 7), createKing(PlayerColor.BLACK));
+        addPiece(new Coordinate(4, 0), createKing(PlayerColor.WHITE, this.size));
+        addPiece(new Coordinate(4, 7), createKing(PlayerColor.BLACK, this.size));
 
         for (int i = 0; i < 8; i++) {
             addPiece(new Coordinate(i, 1), createPawn(PlayerColor.WHITE));

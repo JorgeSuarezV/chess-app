@@ -16,7 +16,6 @@ public class RegularEngine implements GameEngine{
 
     Player player1;
     Player player2;
-
     PlayerColor currentPlayerColor = PlayerColor.WHITE;
     Board board;
     List<Validator> validators = new ArrayList<>();
