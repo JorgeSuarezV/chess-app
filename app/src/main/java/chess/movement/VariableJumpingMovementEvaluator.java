@@ -9,10 +9,13 @@ import chess.position.Position;
 import java.util.Set;
 
 public class VariableJumpingMovementEvaluator extends AbstractEvaluator implements MovementEvaluator{
-    int[][] movements;
 
-    public VariableJumpingMovementEvaluator(int var1, int var2) {
-        this.movements = new int[][]{{-var1, -var2}, {var1, -var2}, {-var1, var2}, {var1, var2}};
+    int x;
+    int y;
+
+    public VariableJumpingMovementEvaluator(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
 
     @Override
@@ -35,11 +38,8 @@ public class VariableJumpingMovementEvaluator extends AbstractEvaluator implemen
         int xFrom = move.getFrom().getX();
         int yFrom = move.getFrom().getY();
 
-        for (int[] movement : movements) {
-            Position endPosition = board.getPosition(new Coordinate(xFrom + movement[0], yFrom + movement[1]));
-            if (endPosition != null && toPosition.compareTo(endPosition) == 0) return true;
-        }
-        return false;
+        Position endPosition = board.getPosition(new Coordinate(xFrom + x, yFrom + y));
+        return endPosition != null && toPosition.compareTo(endPosition) == 0;
     }
 
     @Override

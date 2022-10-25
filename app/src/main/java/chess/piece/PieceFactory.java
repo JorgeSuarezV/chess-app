@@ -57,7 +57,13 @@ public class PieceFactory {
 
         Set<MovementEvaluator> evaluators = new HashSet<>();
         evaluators.add(new VariableJumpingMovementEvaluator(1,2));
+        evaluators.add(new VariableJumpingMovementEvaluator(1,-2));
+        evaluators.add(new VariableJumpingMovementEvaluator(-1,2));
+        evaluators.add(new VariableJumpingMovementEvaluator(-1,-2));
         evaluators.add(new VariableJumpingMovementEvaluator(2,1));
+        evaluators.add(new VariableJumpingMovementEvaluator(2,-1));
+        evaluators.add(new VariableJumpingMovementEvaluator(-2,1));
+        evaluators.add(new VariableJumpingMovementEvaluator(-2,-1));
         return new Piece(evaluators, illegalevaluators, true, color, "K" + id++, PieceType.KNIGHT);
     }
 
