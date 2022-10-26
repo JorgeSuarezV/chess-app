@@ -53,7 +53,8 @@ public class TestBoardImpl implements TestBoard {
     }
 
     @Override
-    public void addDefaultBoardPieces() {
+    public CapablancaBoard addDefaultBoardPieces() {
+        return null;
     }
 
     public void movePiece(Set<Move> moves){

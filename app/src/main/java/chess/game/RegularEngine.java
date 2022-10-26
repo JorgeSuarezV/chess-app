@@ -25,7 +25,6 @@ public class RegularEngine implements GameEngine{
     public RegularEngine() {
         this.player1 = new Player(PlayerColor.WHITE);
         this.player2 = new Player(PlayerColor.BLACK);
-        this.board = chooseGameMode();
         validators.add(new ClassicMoveValidator());
         validators.add(new PromotionValidator(PieceType.PAWN));
         validators.add(new WinValidator());
@@ -34,7 +33,7 @@ public class RegularEngine implements GameEngine{
     @NotNull
     @Override
     public InitialState init() {
-        board.addDefaultBoardPieces();
+        this.board = chooseGameMode();
         return new InitialState(new BoardSize(board.getWidth(), board.getHeight()), getChessPieceList(board.getActualPositions()), PlayerColor.WHITE);
     }
 
@@ -59,9 +58,9 @@ public class RegularEngine implements GameEngine{
         Scanner myObj = new Scanner(System.in);
         System.out.println("Enter game mode: \n 1 for Classic \n 2 for Capablanca");
         int gameMode = myObj.nextInt();
-        if (gameMode == 1) return new ClassicBoard();
-        if (gameMode == 2) return new CapablancaBoard();
-        if (gameMode == 3) return new ClassicBoard();
+        if (gameMode == 1) return new ClassicBoard().addDefaultBoardPieces();
+        if (gameMode == 2) return new CapablancaBoard().addDefaultBoardPieces();
+        if (gameMode == 3) return new ClassicBoard().addDefaultBoardPieces().addAntiPawnSet();
         return new ClassicBoard();
     }
 }

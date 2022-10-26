@@ -58,7 +58,7 @@ public class CapablancaBoard implements Board {
     }
 
     @Override
-    public void addDefaultBoardPieces() {
+    public CapablancaBoard addDefaultBoardPieces() {
         addPiece(new Coordinate(0,0), createRook(PlayerColor.WHITE));
         addPiece(new Coordinate(9,0), createRook(PlayerColor.WHITE));
         addPiece(new Coordinate(0,9), createRook(PlayerColor.BLACK));
@@ -90,10 +90,7 @@ public class CapablancaBoard implements Board {
             addPiece(new Coordinate(i,1), createPawn(PlayerColor.WHITE));
             addPiece(new Coordinate(i,8), createPawn(PlayerColor.BLACK));
         }
-
-
-
-
+        return this;
     }
 
     private void addPiece(Coordinate coordinate, Piece piece){
