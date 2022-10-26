@@ -46,7 +46,7 @@ public class PieceFactory {
 
 
 
-    public static Piece createAntiPawn(PlayerColor color){
-        return new Piece(createAntiPawnMovementEvaluators(color), createGeneralIllegalMovementEvaluators(), true,color, "A" + id++, PieceType.KING);
-    }
+//    public static Piece createAntiPawn(PlayerColor color){
+//        return new Piece(createAntiPawnMovementEvaluators(color), createGeneralIllegalMovementEvaluators(), true,color, "A" + id++, PieceType.KING);
+//    }
 }

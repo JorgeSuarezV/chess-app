@@ -11,7 +11,7 @@ public interface Board extends Cloneable {
 
     Board clone();
 
-    CapablancaBoard addDefaultBoardPieces();
+    Board addDefaultBoardPieces();
 
     void movePiece(Set<Move> moves);
 

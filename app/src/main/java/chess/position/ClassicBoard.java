@@ -59,7 +59,14 @@ public class ClassicBoard implements Board {
     }
 
     @Override
-    public ClassicBoard addDefaultBoardPieces() {
+    public Board addDefaultBoardPieces() {
+        addSpecialDefault();
+
+        addPawns();
+        return this;
+    }
+
+    public ClassicBoard addSpecialDefault() {
         addPiece(new Coordinate(0,0), createRook(PlayerColor.WHITE));
         addPiece(new Coordinate(7,0), createRook(PlayerColor.WHITE));
         addPiece(new Coordinate(0,7), createRook(PlayerColor.BLACK));
@@ -80,10 +87,9 @@ public class ClassicBoard implements Board {
 
         addPiece(new Coordinate(4, 0), createKing(PlayerColor.WHITE, this.size));
         addPiece(new Coordinate(4, 7), createKing(PlayerColor.BLACK, this.size));
-
-        addPawns();
         return this;
     }
+
     private ClassicBoard addPawns(){
         for (int i = 0; i < 8; i++) {
             addPiece(new Coordinate(i, 1), createPawn(PlayerColor.WHITE));
@@ -92,13 +98,13 @@ public class ClassicBoard implements Board {
         return this;
     }
 
-    public ClassicBoard addAntiPawnSet(){
-        for (int i = 0; i < 8; i++) {
-            addPiece(new Coordinate(i, 1), createAntiPawn(PlayerColor.WHITE));
-            addPiece(new Coordinate(i, 6), createAntiPawn(PlayerColor.BLACK));
-        }
-        return this;
-    }
+//    public ClassicBoard addAntiPawnSet(){
+//        for (int i = 0; i < 8; i++) {
+//            addPiece(new Coordinate(i, 1), createAntiPawn(PlayerColor.WHITE));
+//            addPiece(new Coordinate(i, 6), createAntiPawn(PlayerColor.BLACK));
+//        }
+//        return this;
+//    }
 
     private void addPiece(Coordinate coordinate, Piece piece){
         for (Position position : history.get(history.size()-1)) {

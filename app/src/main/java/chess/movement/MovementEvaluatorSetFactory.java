@@ -102,20 +102,20 @@ public class MovementEvaluatorSetFactory {
     }
 
 
-        public static Set<MovementEvaluator> createAntiPawnMovementEvaluators(PlayerColor color){
-        int vectorY = 1;
-        if (color == PlayerColor.BLACK) vectorY = -1;
-        Set<MovementEvaluator> evaluators = new HashSet<>();
-        evaluators.add(new PathTakeMovementEvaluator(-3, 3*vectorY)
-                .addMovementEvaluator(new MoveQuantityMovementEvaluator(0)));
-        evaluators.add(new PathTakeMovementEvaluator(3,3*vectorY)
-                .addMovementEvaluator(new MoveQuantityMovementEvaluator(0)));
-        evaluators.add(new VariableJumpingMovementEvaluator(-1, vectorY)
-                .addMovementEvaluator(new TakeMovementEvaluator(false)));
-        evaluators.add(new VariableJumpingMovementEvaluator(1, vectorY)
-                .addMovementEvaluator(new TakeMovementEvaluator(false)));
-        evaluators.add(new VariableJumpingMovementEvaluator(0, vectorY)
-                .addMovementEvaluator(new TakeMovementEvaluator(true)));
-        return evaluators;
-    }
+//        public static Set<MovementEvaluator> createAntiPawnMovementEvaluators(PlayerColor color){
+//        int vectorY = 1;
+//        if (color == PlayerColor.BLACK) vectorY = -1;
+//        Set<MovementEvaluator> evaluators = new HashSet<>();
+//        evaluators.add(new PathTakeMovementEvaluator(-3, 3*vectorY)
+//                .addMovementEvaluator(new MoveQuantityMovementEvaluator(0)));
+//        evaluators.add(new PathTakeMovementEvaluator(3,3*vectorY)
+//                .addMovementEvaluator(new MoveQuantityMovementEvaluator(0)));
+//        evaluators.add(new VariableJumpingMovementEvaluator(-1, vectorY)
+//                .addMovementEvaluator(new TakeMovementEvaluator(false)));
+//        evaluators.add(new VariableJumpingMovementEvaluator(1, vectorY)
+//                .addMovementEvaluator(new TakeMovementEvaluator(false)));
+//        evaluators.add(new VariableJumpingMovementEvaluator(0, vectorY)
+//                .addMovementEvaluator(new TakeMovementEvaluator(true)));
+//        return evaluators;
+//    }
 }
