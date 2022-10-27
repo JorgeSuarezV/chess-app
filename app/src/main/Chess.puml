@@ -1,0 +1,18 @@
+@startuml
+
+package adapter{
+
+class Adapter{
++ {static} getChessPieceList(List<Position> actualState)
++ {static} chess.position.Move castGUIMoveToMove(Move move)
+}
+
+}
+package chess{
+
+package game{
+
+}
+}
+
+@enduml

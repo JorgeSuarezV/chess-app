@@ -17,16 +17,12 @@ import static chess.position.BoardFactory.createClassicBoard;
 
 public class RegularEngine implements GameEngine{
 
-    Player player1;
-    Player player2;
     PlayerColor currentPlayerColor = PlayerColor.WHITE;
     Board board;
     List<Validator> validators = new ArrayList<>();
 
 
     public RegularEngine() {
-        this.player1 = new Player(PlayerColor.WHITE);
-        this.player2 = new Player(PlayerColor.BLACK);
         validators.add(new ClassicMoveValidator());
         validators.add(new PromotionValidator(PieceType.PAWN));
         validators.add(new WinValidator());
