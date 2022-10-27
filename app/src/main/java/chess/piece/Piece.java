@@ -27,9 +27,10 @@ public class Piece implements Comparable<Piece>,Cloneable {
         this.type = type;
     }
 
-    public Piece clone(){
-        return new Piece(movementEvaluators, illegalMovementEvaluators, takeable, color, name, type);
+    public boolean isTakeable() {
+        return takeable;
     }
+
 
     public boolean isTakeable(Piece piece) {
         return takeable && piece.getPlayerColor() != getPlayerColor();

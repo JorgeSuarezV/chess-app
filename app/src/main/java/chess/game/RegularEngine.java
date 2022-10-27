@@ -16,9 +16,9 @@ import static chess.position.BoardFactory.*;
 
 public class RegularEngine implements GameEngine{
 
-    PlayerColor currentPlayerColor = PlayerColor.WHITE;
-    Board board;
-    List<Validator> validators = new ArrayList<>();
+    private PlayerColor currentPlayerColor = PlayerColor.WHITE;
+    private Board board;
+    private final List<Validator> validators = new ArrayList<>();
 
 
     public RegularEngine() {

@@ -11,9 +11,9 @@ import java.util.Set;
 
 public class RangeMovementEvaluator extends AbstractEvaluator implements MovementEvaluator{
 
-    int shots;
-    int range;
-    Set<PieceType> targets;
+    private int shots;
+    private final int range;
+    private final Set<PieceType> targets;
 
     public RangeMovementEvaluator(int shots, int range, Set<PieceType> targets) {
         this.shots = shots;
@@ -49,11 +49,5 @@ public class RangeMovementEvaluator extends AbstractEvaluator implements Movemen
                 && Math.abs(move.getFrom().getY() - move.getTo().getY()) <= range){
             return true;
         }return false;
-    }
-
-    @Override
-    public MovementEvaluator addMovementEvaluator(MovementEvaluator movementEvaluator) {
-        super.addMovementEvaluator(movementEvaluator);
-        return this;
     }
 }

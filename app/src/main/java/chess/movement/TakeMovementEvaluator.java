@@ -55,8 +55,5 @@ public class TakeMovementEvaluator extends AbstractEvaluator implements Movement
         else throw new CannotTakePieceException();
     }
 
-    @Override
-    public MovementEvaluator addMovementEvaluator(MovementEvaluator movementEvaluator) {
-        return super.addMovementEvaluator(movementEvaluator);
-    }
+
 }

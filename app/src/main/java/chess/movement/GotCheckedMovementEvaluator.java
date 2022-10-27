@@ -14,7 +14,7 @@ import edu.austral.dissis.chess.gui.PlayerColor;
 import java.util.List;
 import java.util.Set;
 
-public class GotCheckedMovementEvaluator implements MovementEvaluator{
+public class GotCheckedMovementEvaluator extends AbstractEvaluator implements MovementEvaluator{
 
     @Override
     public Set<Move> isValidMove(Board board, Move move, Set<Move> moves) throws SelfCheckException, MovementException, OutOfBoundsException {
@@ -56,10 +56,5 @@ public class GotCheckedMovementEvaluator implements MovementEvaluator{
     @Override
     public boolean isThreatening(Board board, Move move) {
         return false;
-    }
-
-    @Override
-    public MovementEvaluator addMovementEvaluator(MovementEvaluator movementEvaluator) {
-        return null;
     }
 }

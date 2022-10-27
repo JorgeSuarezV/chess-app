@@ -10,8 +10,8 @@ import chess.position.Position;
 import java.util.Set;
 
 public class UnidirectionalMovementEvaluator extends AbstractEvaluator implements MovementEvaluator{
-    int vectorX;
-    int vectorY;
+    private final int vectorX;
+    private final int vectorY;
 
     public UnidirectionalMovementEvaluator(int vectorX, int vectorY) {
         this.vectorX = vectorX;
@@ -57,7 +57,5 @@ public class UnidirectionalMovementEvaluator extends AbstractEvaluator implement
     }
 
 
-    public MovementEvaluator addMovementEvaluator(MovementEvaluator movementEvaluator) {
-        return super.addMovementEvaluator(movementEvaluator);
-    }
+
 }

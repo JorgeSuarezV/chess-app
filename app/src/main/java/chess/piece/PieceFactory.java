@@ -10,7 +10,7 @@ import static chess.movement.MovementEvaluatorSetFactory.*;
 
 public class PieceFactory {
 
-    static int id = 0;
+    private static int id = 0;
 
     public static Piece createRook(PlayerColor color){
         return new Piece(createRookMovementEvaluators(), createGeneralIllegalMovementEvaluators(), true, color, "R" + id++, PieceType.ROOK);

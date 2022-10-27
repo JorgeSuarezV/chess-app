@@ -37,8 +37,5 @@ public class LimitMovementEvaluator extends AbstractEvaluator implements Movemen
         return isValidMove(board, move, moves).size() != 0;
     }
 
-    @Override
-    public MovementEvaluator addMovementEvaluator(MovementEvaluator movementEvaluator) {
-        return super.addMovementEvaluator(movementEvaluator);
-    }
+
 }

@@ -10,8 +10,8 @@ import java.util.Set;
 
 public class VariableJumpingMovementEvaluator extends AbstractEvaluator implements MovementEvaluator{
 
-    int x;
-    int y;
+    private final int x;
+    private final int y;
 
     public VariableJumpingMovementEvaluator(int x, int y) {
         this.x = x;
@@ -42,8 +42,4 @@ public class VariableJumpingMovementEvaluator extends AbstractEvaluator implemen
         return endPosition != null && toPosition.compareTo(endPosition) == 0;
     }
 
-    @Override
-    public MovementEvaluator addMovementEvaluator(MovementEvaluator movementEvaluator) {
-        return super.addMovementEvaluator(movementEvaluator);
-    }
 }

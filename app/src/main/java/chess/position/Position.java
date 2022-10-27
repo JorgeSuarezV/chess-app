@@ -17,10 +17,7 @@ public class Position implements Comparable<Position>, Cloneable{
         this.piece = piece;
     }
 
-    public Position clone(){
-        if (piece == null) return new Position(coordinate, null);
-        return new Position(coordinate, piece);
-    }
+
     public int getX() {
         return coordinate.getX();
     }

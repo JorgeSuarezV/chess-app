@@ -49,14 +49,14 @@ public class MovementEvaluatorSetFactory {
         return evaluators;
     }
 
-        public static Set<MovementEvaluator> createKingMovementEvaluators(PlayerColor color, int boardSize) {
-        Set<MovementEvaluator> evaluators = createQueenMovementEvaluators();
-        if (color == PlayerColor.WHITE) evaluators.add(new CastleMovementEvaluator(0));
-        else evaluators.add(new CastleMovementEvaluator(boardSize - 1));
-        for (MovementEvaluator movementEvaluator : evaluators) {
-            movementEvaluator.addMovementEvaluator(new LimitMovementEvaluator(1));
-        }
-        return evaluators;
+    public static Set<MovementEvaluator> createKingMovementEvaluators(PlayerColor color, int boardSize) {
+    Set<MovementEvaluator> evaluators = createQueenMovementEvaluators();
+    if (color == PlayerColor.WHITE) evaluators.add(new CastleMovementEvaluator(0));
+    else evaluators.add(new CastleMovementEvaluator(boardSize - 1));
+    for (MovementEvaluator movementEvaluator : evaluators) {
+        movementEvaluator.addMovementEvaluator(new LimitMovementEvaluator(1));
+    }
+    return evaluators;
     }
 
     public static Set<MovementEvaluator> createKnightMovementEvaluators(){

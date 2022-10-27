@@ -58,8 +58,5 @@ public class MoveQuantityMovementEvaluator extends AbstractEvaluator implements 
         return count;
     }
 
-    @Override
-    public MovementEvaluator addMovementEvaluator(MovementEvaluator movementEvaluator) {
-        return super.addMovementEvaluator(movementEvaluator);
-    }
+
 }
