@@ -12,6 +12,10 @@ public class BoardFactory {
         return new ClassicBoard().addDefaultBoardPieces();
     }
 
+    public static Board createMusketeerBoard(){
+        return new ClassicBoard().addMusketeers();
+    }
+
 
     public static Board createCapablancaBoard(){
         return new CapablancaBoard().addDefaultBoardPieces();
