@@ -1,6 +1,7 @@
 package chess.movement;
 
 import chess.piece.Piece;
+import chess.piece.PieceType;
 import edu.austral.dissis.chess.gui.Move;
 import edu.austral.dissis.chess.gui.PlayerColor;
 
@@ -23,6 +24,12 @@ public class MovementEvaluatorSetFactory {
         evaluators.add(new UnidirectionalMovementEvaluator(-1,1));
         evaluators.add(new UnidirectionalMovementEvaluator(-1,-1));
         evaluators.add(new UnidirectionalMovementEvaluator(1,-1));
+        return evaluators;
+    }
+
+    public static Set<MovementEvaluator> createMusketeerMovementEvaluator(){
+        Set<MovementEvaluator> evaluators = createBishopMovementEvaluators();
+        evaluators.add(new RangeMovementEvaluator(1, 2, Set.of(PieceType.PAWN)));
         return evaluators;
     }
 

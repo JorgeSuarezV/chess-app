@@ -97,6 +97,16 @@ public class ClassicBoard implements Board {
         }
         return this;
     }
+    public ClassicBoard addMusketeers(){
+        addDefaultBoardPieces();
+
+
+        addPiece(new Coordinate(2, 0), createMusketeer(PlayerColor.WHITE));
+        addPiece(new Coordinate(5, 0), createMusketeer(PlayerColor.WHITE));
+        addPiece(new Coordinate(2,7), createMusketeer(PlayerColor.BLACK));
+        addPiece(new Coordinate(5,7), createMusketeer(PlayerColor.BLACK));
+        return this;
+    }
 
 //    public ClassicBoard addAntiPawnSet(){
 //        for (int i = 0; i < 8; i++) {

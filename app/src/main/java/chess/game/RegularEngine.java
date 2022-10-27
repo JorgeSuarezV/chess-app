@@ -12,8 +12,7 @@ import java.util.Scanner;
 
 import static adapter.Adapter.castGUIMoveToMove;
 import static adapter.Adapter.getChessPieceList;
-import static chess.position.BoardFactory.createCapablancaBoard;
-import static chess.position.BoardFactory.createClassicBoard;
+import static chess.position.BoardFactory.*;
 
 public class RegularEngine implements GameEngine{
 
@@ -54,10 +53,11 @@ public class RegularEngine implements GameEngine{
     }
     private Board chooseGameMode(){
         Scanner myObj = new Scanner(System.in);
-        System.out.println("Enter game mode: \n 1 for Classic \n 2 for Capablanca");
+        System.out.println("Enter game mode: \n 1 for Classic \n 2 for Capablanca \n 3 for MusketeerBoard");
         int gameMode = myObj.nextInt();
         if (gameMode == 1) return createClassicBoard();
         if (gameMode == 2) return createCapablancaBoard();
+        if (gameMode == 3) return createMusketeerBoard();
         else return createClassicBoard();
 
     }

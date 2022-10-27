@@ -19,11 +19,11 @@ public class GotCheckedMovementEvaluator implements MovementEvaluator{
     @Override
     public Set<Move> isValidMove(Board board, Move move, Set<Move> moves) throws SelfCheckException, MovementException, OutOfBoundsException {
         Board board1 = board.clone();
-        board1.movePiece(moves);
-        Position position = board1.getPosition(move.getTo());
+        Position position = board1.getPosition(move.getFrom());
         if (position == null) throw new OutOfBoundsException();
         Piece piece = position.getPiece();
         if (piece == null) throw new MovementException("This piece is not yours");
+        board1.movePiece(moves);
         PlayerColor playerColor = piece.getPlayerColor();
         PlayerColor oponentColor = playerColor == PlayerColor.WHITE ? PlayerColor.BLACK : PlayerColor.WHITE;
         List<Position> actualPositions = board1.getActualPositions();

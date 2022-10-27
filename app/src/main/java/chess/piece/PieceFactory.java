@@ -44,6 +44,10 @@ public class PieceFactory {
         return new Piece(createArchbishopMovementEvaluators(), createGeneralIllegalMovementEvaluators(), true, color, "C" + id++, PieceType.ARCHBISHOP);
     }
 
+    public static Piece createMusketeer(PlayerColor color){
+        return new Piece(createMusketeerMovementEvaluator(), createGeneralIllegalMovementEvaluators(), true, color, "M" + id++, PieceType.MOSKETEER);
+    }
+
 
 
 //    public static Piece createAntiPawn(PlayerColor color){

@@ -1,5 +1,6 @@
 package adapter;
 
+import chess.piece.PieceType;
 import chess.position.Coordinate;
 import chess.position.Position;
 import edu.austral.dissis.chess.gui.ChessPiece;
@@ -7,6 +8,7 @@ import edu.austral.dissis.chess.gui.Move;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class Adapter {
 
@@ -18,9 +20,15 @@ public class Adapter {
                     position.getPiece().getPlayerColor(),
                     new edu.austral.dissis.chess.gui.Position(position.getY() + 1,
                     position.getX() + 1),
-                    position.getPiece().getType().name().toLowerCase()));
+                    pieceTypeAdapter(position.getPiece().getType())
+                    ));
         }
         return chessPieces;
+    }
+
+    public static String pieceTypeAdapter(PieceType pieceType){
+        if (pieceType == PieceType.MOSKETEER) return "chancellor";
+        else return pieceType.name().toLowerCase();
     }
 
     public static chess.position.Move castGUIMoveToMove(Move move){
