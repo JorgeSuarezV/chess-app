@@ -5,10 +5,11 @@ import chess.position.Board;
 import chess.position.Coordinate;
 import chess.position.Move;
 import chess.position.Position;
-
 import java.util.Set;
 
-public class VariableJumpingMovementEvaluator extends AbstractEvaluator implements MovementEvaluator{
+public class VariableJumpingMovementEvaluator
+    extends AbstractEvaluator
+     {
 
     private final int x;
     private final int y;
@@ -19,27 +20,41 @@ public class VariableJumpingMovementEvaluator extends AbstractEvaluator implemen
     }
 
     @Override
-    public Set<Move> isValidMove(Board board, Move move, Set<Move> moves) throws OutOfBoundsException, NotMovingAPieceException, MovementException, CannotTakePieceException, PathBlockedException, SelfCheckException {
-        if (VariableJumpingLogic(board, move)) return reachedPosition(board, move, moves);
+    public Set<Move> isValidMove(Board board, Move move, Set<Move> moves)
+        throws OutOfBoundsException, NotMovingAPieceException, MovementException, CannotTakePieceException, PathBlockedException, SelfCheckException {
+        if (VariableJumpingLogic(board, move)) return reachedPosition(
+            board,
+            move,
+            moves
+        );
         throw new MovementException();
     }
 
     @Override
-    public boolean isThreatening(Board board, Move move) throws MovementException, NotMovingAPieceException, OutOfBoundsException, CannotTakePieceException, PathBlockedException, SelfCheckException {
-        if (VariableJumpingLogic(board, move)) return checkTargetMoveWithEvaluators(board, move);
+    public boolean isThreatening(Board board, Move move)
+        throws MovementException, NotMovingAPieceException, OutOfBoundsException, CannotTakePieceException, PathBlockedException, SelfCheckException {
+        if (
+            VariableJumpingLogic(board, move)
+        ) return checkTargetMoveWithEvaluators(board, move);
         throw new MovementException();
     }
 
-    private boolean VariableJumpingLogic(Board board, Move move) throws OutOfBoundsException {
+    private boolean VariableJumpingLogic(Board board, Move move)
+        throws OutOfBoundsException {
         Position fromPosition = board.getPosition(move.getFrom());
         Position toPosition = board.getPosition(move.getTo());
-        if (fromPosition == null || toPosition == null || fromPosition.getPiece() == null) throw new OutOfBoundsException();
+        if (
+            fromPosition == null ||
+            toPosition == null ||
+            fromPosition.getPiece() == null
+        ) throw new OutOfBoundsException();
 
         int xFrom = move.getFrom().getX();
         int yFrom = move.getFrom().getY();
 
-        Position endPosition = board.getPosition(new Coordinate(xFrom + x, yFrom + y));
+        Position endPosition = board.getPosition(
+            new Coordinate(xFrom + x, yFrom + y)
+        );
         return endPosition != null && toPosition.compareTo(endPosition) == 0;
     }
-
 }

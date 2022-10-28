@@ -9,5 +9,5 @@ public enum PieceType {
     PAWN,
     ARCHBISHOP,
     CHANCELLOR,
-    MOSKETEER
+    MOSKETEER,
 }

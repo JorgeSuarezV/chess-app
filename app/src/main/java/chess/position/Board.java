@@ -1,13 +1,12 @@
 package chess.position;
 
-import org.jetbrains.annotations.Nullable;
-
 import java.util.List;
 import java.util.Set;
+import org.jetbrains.annotations.Nullable;
 
 public interface Board extends Cloneable {
-
-    @Nullable Position getPosition(Coordinate coordinate);
+    @Nullable
+    Position getPosition(Coordinate coordinate);
 
     Board clone();
 

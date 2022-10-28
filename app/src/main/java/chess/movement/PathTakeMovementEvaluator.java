@@ -12,7 +12,7 @@
 //import java.util.List;
 //import java.util.Set;
 //
-//public class PathTakeMovementEvaluator extends AbstractEvaluator implements MovementEvaluator{
+//public class PathTakeMovementEvaluator extends AbstractEvaluator {
 //
 //    int xVector;
 //    int yVector;

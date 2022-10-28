@@ -3,8 +3,8 @@
 package adapter{
 
     class Adapter{
-    + {static} getChessPieceList(List<Position> actualState)
-    + {static} chess.position.Move castGUIMoveToMove(Move move)
+        + {static} getChessPieceList(List<Position> actualState)
+        + {static} chess.position.Move castGUIMoveToMove(Move move)
     }
 
 }
@@ -12,13 +12,13 @@ package chess{
 
     package game{
 
-        class Regular implements GameEngine{
-        - PlayerColor currentPlayerColor
-        - Board board
-        - List<Validator> validators
-        - Board chooseGameMode()
-        + InitialState init()
-        + MoveResult applyMove(Move move)
+        class RegularEngine implements GameEngine{
+            - PlayerColor currentPlayerColor
+            - Board board
+            - List<Validator> validators
+            - Board chooseGameMode()
+            + InitialState init()
+            + MoveResult applyMove(Move move)
         }
 
     }
@@ -26,85 +26,85 @@ package chess{
     package movement{
 
         interface MovementEvaluator{
-        Set<Move> isValidMove(Board board, Move move, Set<Move> moves)
-        boolean isThreatening(Board board, Move move)
-        MovementEvaluator addMovementEvaluator(MovementEvaluator movementEvaluator)
+            Set<Move> isValidMove(Board board, Move move, Set<Move> moves)
+            boolean isThreatening(Board board, Move move)
+            MovementEvaluator addMovementEvaluator(MovementEvaluator movementEvaluator)
         }
 
-        class AbstractEvaluator{
-        - Set<MovementEvaluator> movementEvaluators
-        + Set<Move> reachedPosition(Board board, Move move, Set<Move> moves)
-        + Set<Move> checkValidMoveWithEvaluators(Board board, Move move, Set<Move> moves)
-        + boolean checkTargetMoveWithEvaluators(Board board, Move move)
-        + MovementEvaluator addMovementEvaluator(MovementEvaluator movementEvaluator)
+        class AbstractEvaluator implements MovementEvaluator{
+            - Set<MovementEvaluator> movementEvaluators
+            + {abstract} Set<Move> reachedPosition(Board board, Move move, Set<Move> moves)
+            + {abstract} Set<Move> checkValidMoveWithEvaluators(Board board, Move move, Set<Move> moves)
+            + {abstract} boolean checkTargetMoveWithEvaluators(Board board, Move move)
+            + {abstract} MovementEvaluator addMovementEvaluator(MovementEvaluator movementEvaluator)
         }
 
         class MovementEvaluatorSetFactory{
-        + {static} Set<MovementEvaluator> createGeneralIllegalMovementEvaluators()
-        + {static} Set<MovementEvaluator> createBishopMovementEvaluators()
-        + {static} Set<MovementEvaluator> createMusketeerMovementEvaluator()
-        + {static} Set<MovementEvaluator> createQueenMovementEvaluators()
-        + {static} Set<MovementEvaluator> createRookMovementEvaluators()
-        + {static} Set<MovementEvaluator> createKingMovementEvaluators(PlayerColor color, int boardSize)
-        + {static} Set<MovementEvaluator> createKnightMovementEvaluators()
-        + {static} Set<MovementEvaluator> createPawnMovementEvaluators(PlayerColor color)
-        + {static} Set<MovementEvaluator> createArchbishopMovementEvaluators()
-        + {static} Set<MovementEvaluator> createChancellorMovementEvaluators()
+            + {static} Set<MovementEvaluator> createGeneralIllegalMovementEvaluators()
+            + {static} Set<MovementEvaluator> createBishopMovementEvaluators()
+            + {static} Set<MovementEvaluator> createMusketeerMovementEvaluator()
+            + {static} Set<MovementEvaluator> createQueenMovementEvaluators()
+            + {static} Set<MovementEvaluator> createRookMovementEvaluators()
+            + {static} Set<MovementEvaluator> createKingMovementEvaluators(PlayerColor color, int boardSize)
+            + {static} Set<MovementEvaluator> createKnightMovementEvaluators()
+            + {static} Set<MovementEvaluator> createPawnMovementEvaluators(PlayerColor color)
+            + {static} Set<MovementEvaluator> createArchbishopMovementEvaluators()
+            + {static} Set<MovementEvaluator> createChancellorMovementEvaluators()
         }
 
-        class CastleMovementEvaluetor{
-        - void checkMovementEvaluators(Board board,Move move, Set<Move> moves, Piece piece)
-        + Set<Move> isValidMove(Board board, Move move, Set<Move> moves)
-        + boolean isThreatening(Board board, Move move)
+        class CastleMovementEvaluator {
+            - void checkMovementEvaluators(Board board,Move move, Set<Move> moves, Piece piece)
+            + Set<Move> isValidMove(Board board, Move move, Set<Move> moves)
+            + boolean isThreatening(Board board, Move move)
         }
 
         class LimitMovementEvaluator{
-        - int limit
-        + Set<Move> isValidMove(Board board, Move move, Set<Move> moves)
-        + boolean isThreatening(Board board, Move move)
+            - int limit
+            + Set<Move> isValidMove(Board board, Move move, Set<Move> moves)
+            + boolean isThreatening(Board board, Move move)
         }
 
         class GotCheckedMovementEvaluator{
-        + Set<Move> isValidMove(Board board, Move move, Set<Move> moves)
-        + boolean isThreatening(Board board, Move move)
+            + Set<Move> isValidMove(Board board, Move move, Set<Move> moves)
+            + boolean isThreatening(Board board, Move move)
         }
 
         class MoveQuantityMovementEvaluator{
-        - int maxMove
-        - int countMovements(Board board, Coordinate coordinate, Piece piece)
-        + Set<Move> isValidMove(Board board, Move move, Set<Move> moves)
-        + boolean isThreatening(Board board, Move move)
+            - int maxMove
+            - int countMovements(Board board, Coordinate coordinate, Piece piece)
+            + Set<Move> isValidMove(Board board, Move move, Set<Move> moves)
+            + boolean isThreatening(Board board, Move move)
         }
 
         class RangeMovementEvaluator{
-        - int shots
-        - int range
-        - Set<PieceType> targets
-        + Set<Move> isValidMove(Board board, Move move, Set<Move> moves)
-        + boolean isThreatening(Board board, Move move)
+            - int shots
+            - int range
+            - Set<PieceType> targets
+            + Set<Move> isValidMove(Board board, Move move, Set<Move> moves)
+            + boolean isThreatening(Board board, Move move)
         }
 
         class TakeMovementEvaluator{
-        - boolean canTake
-        + Set<Move> isValidMove(Board board, Move move, Set<Move> moves)
-        + boolean isThreatening(Board board, Move move)
+            - boolean canTake
+            + Set<Move> isValidMove(Board board, Move move, Set<Move> moves)
+            + boolean isThreatening(Board board, Move move)
         }
 
         class UnidirectionalMovementEvaluator{
-        - int vectorX
-        - int vectorY
-        - Position logicSetup(Board board, Move move)
-        - boolean pathLogic(Position positionToEvaluate, Move move, Board board)
-        + Set<Move> isValidMove(Board board, Move move, Set<Move> moves)
-        + boolean isThreatening(Board board, Move move)
+            - int vectorX
+            - int vectorY
+            - Position logicSetup(Board board, Move move)
+            - boolean pathLogic(Position positionToEvaluate, Move move, Board board)
+            + Set<Move> isValidMove(Board board, Move move, Set<Move> moves)
+            + boolean isThreatening(Board board, Move move)
         }
 
         class VariableJumpingMovementEvaluator{
-        - int x
-        - int y
-        - boolean VariableJumpingLogic(Board board, Move move)
-        + Set<Move> isValidMove(Board board, Move move, Set<Move> moves)
-        + boolean isThreatening(Board board, Move move)
+            - int x
+            - int y
+            - boolean VariableJumpingLogic(Board board, Move move)
+            + Set<Move> isValidMove(Board board, Move move, Set<Move> moves)
+            + boolean isThreatening(Board board, Move move)
         }
 
     }
@@ -112,28 +112,28 @@ package chess{
     package piece{
 
         class Piece{
-        - Set<MovementEvaluator> movementEvaluators
-        - Set<MovementEvaluator> illegalMovementEvaluators
-        - boolean takeable
-        - String name
-        - PlayerColor color
-        - PieceType type
-        + boolean isTakeable(Piece piece)
-        + int compareTo(Piece o)
-        + gettersAndSetters()
+            - Set<MovementEvaluator> movementEvaluators
+            - Set<MovementEvaluator> illegalMovementEvaluators
+            - boolean takeable
+            - String name
+            - PlayerColor color
+            - PieceType type
+            + boolean isTakeable(Piece piece)
+            + int compareTo(Piece o)
+            + gettersAndSetters()
         }
 
         class PieceFactory{
-        - int id
-        + {static} Piece createRook(PlayerColor color)
-        + {static} Piece createBishop(PlayerColor color)
-        + {static} Piece createQueen(PlayerColor color)
-        + {static} Piece createKing(PlayerColor color, int boardSize)
-        + {static} Piece createPawn(PlayerColor color)
-        + {static} Piece createChancellor(PlayerColor color)
-        + {static} Piece createArchbishop(PlayerColor color)
-        + {static} Piece createMusketeer(PlayerColor color)
-        + {static} Piece createKnight(PlayerColor color)
+            - int id
+            + {static} Piece createRook(PlayerColor color)
+            + {static} Piece createBishop(PlayerColor color)
+            + {static} Piece createQueen(PlayerColor color)
+            + {static} Piece createKing(PlayerColor color, int boardSize)
+            + {static} Piece createPawn(PlayerColor color)
+            + {static} Piece createChancellor(PlayerColor color)
+            + {static} Piece createArchbishop(PlayerColor color)
+            + {static} Piece createMusketeer(PlayerColor color)
+            + {static} Piece createKnight(PlayerColor color)
         }
 
         enum PieceType{
@@ -152,11 +152,125 @@ package chess{
 
     package position{
 
+        interface Board{
+            Position getPosition(Coordinate coordinate);
+            Board clone();
+            Board addDefaultBoardPieces();
+            void movePiece(Set<Move> moves);
+            List<List<Position>> getHistory();
+            List<Position> getActualPositions();
+            int getHeight();
+            int getWidth();
+        }
+
+        interface Validator{
+            MoveResult checkMove(Board board,Move move,PlayerColor currentPlayerColor)
+        }
+
+        class BoardFactory{
+        + {static} Board createClassicBoard()
+        + {static} Board createMusketeerBoard()
+        + {static} Board createCapablancaBoard()
+        }
+
+        class Coordinate implements Comparable{
+            - int x
+            - int y
+            + getters()
+            + compareTo()
+        }
+
+        class Move{
+            - Coordinate from
+            - Coordinate to
+            + boolean equals(Object o)
+            + int hashCode()
+            + getters()
+        }
+
+        class CapablancaBoard implements Board{
+            - List<List<Position>> history
+            - int size
+            - Position getPosition(List<Position> positions, Coordinate coordinate)
+            - List<Position> generatePositions()
+            - void addPiece(Coordinate coordinate, Piece piece)
+            + Position getPosition(Coordinate coordinate)
+            + Board clone()
+            + Board addDefaultBoardPieces()
+            + void movePiece(Set<Move> moves)
+            + List<List<Position>> getHistory()
+            + List<Position> getActualPositions()
+            + int getHeight()
+            + int getWidth()
+        }
+
+        class ClassicBoard{
+            - List<List<Position>> history
+            - int size
+            - List<Position> generatePositions()
+            - void addPiece(Coordinate coordinate, Piece piece)
+            - Position getPosition(List<Position> positions,Coordinate coordinate)
+            + Position getPosition(Coordinate coordinate)
+            + ClassicBoard addSpecialDefault()
+            + Board addDefaultBoardPieces()
+            + Board clone()
+            + ClassicBoard addMusketeers()
+            + void movePiece(Set<Move> moves)
+            + List<List<Position>> getHistory()
+            + List<Position> getActualPositions()
+            + int getHeight()
+            + int getWidth()
+        }
+
+        class ClassicMoveValidator {
+            - void checkIllegalMovementEvaluators(Board board,Move move,Set<Move> moves,Piece piece)
+            - void checkMovementEvaluators(Board board,Move move,Set<Move> moves,Piece piece)
+            + MoveResult checkMove(Board board,Move move,PlayerColor currentPlayerColor)
+        }
+
+        class Position{
+            - Coordinate coordinate
+            - Piece piece
+            + int getX()
+            + int getY()
+            + Coordinate getCoordinate()
+            + Piece getPiece()
+            + Piece setPiece(Piece piece)
+            + int compareTo(Position o)
+        }
+
+        class PromotionValidator{
+            - PieceType from
+            - void convertToQueen(Piece piece, PlayerColor color)
+            + MoveResult checkMove(Board board,Move move,PlayerColor currentPlayerColor)
+        }
+
+        class WinValidator{
+        - Validator validator
+        + public MoveResult checkMove(Board board,Move move,PlayerColor currentPlayerColor)
+        }
     }
 
-    package cloner{
+    package util{
 
+        class Cloner{
+            + {static} List<Position> clonePositionList(List<Position> originalArrayList)
+            + {static} List<List<Position>> cloneBoard(List<List<Position>> history)
+            + {static} Position clonePosition(Position position)
+            + {static} Piece clonePiece(Piece piece)
+        }
     }
 }
+
+AbstractEvaluator <|-- CastleMovementEvaluator
+AbstractEvaluator <|-- MoveQuantityMovementEvaluator
+AbstractEvaluator <|-- RangeMovementEvaluator
+AbstractEvaluator <|-- TakeMovementEvaluator
+AbstractEvaluator <|-- UnidirectionalMovementEvaluator
+AbstractEvaluator <|-- GotCheckedMovementEvaluator
+AbstractEvaluator <|-- LimitMovementEvaluator
+AbstractEvaluator <|-- VariableJumpingMovementEvaluator
+
+
 
 @enduml

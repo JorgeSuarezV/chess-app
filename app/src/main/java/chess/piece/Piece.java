@@ -2,11 +2,10 @@ package chess.piece;
 
 import chess.movement.MovementEvaluator;
 import edu.austral.dissis.chess.gui.PlayerColor;
+import java.util.Set;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Set;
-
-public class Piece implements Comparable<Piece>,Cloneable {
+public class Piece implements Comparable<Piece>, Cloneable {
 
     private Set<MovementEvaluator> movementEvaluators;
     private Set<MovementEvaluator> illegalMovementEvaluators;
@@ -15,10 +14,14 @@ public class Piece implements Comparable<Piece>,Cloneable {
     private PlayerColor color;
     private PieceType type;
 
-
-
-
-    public Piece(Set<MovementEvaluator> MovementEvaluators, Set<MovementEvaluator> illegalMovementEvaluators, boolean takeable, PlayerColor color, String name, PieceType type) {
+    public Piece(
+        Set<MovementEvaluator> MovementEvaluators,
+        Set<MovementEvaluator> illegalMovementEvaluators,
+        boolean takeable,
+        PlayerColor color,
+        String name,
+        PieceType type
+    ) {
         this.movementEvaluators = MovementEvaluators;
         this.illegalMovementEvaluators = illegalMovementEvaluators;
         this.takeable = takeable;
@@ -30,7 +33,6 @@ public class Piece implements Comparable<Piece>,Cloneable {
     public boolean isTakeable() {
         return takeable;
     }
-
 
     public boolean isTakeable(Piece piece) {
         return takeable && piece.getPlayerColor() != getPlayerColor();
@@ -63,11 +65,15 @@ public class Piece implements Comparable<Piece>,Cloneable {
         this.type = type;
     }
 
-    public void setMovementEvaluators(Set<MovementEvaluator> movementEvaluators) {
+    public void setMovementEvaluators(
+        Set<MovementEvaluator> movementEvaluators
+    ) {
         this.movementEvaluators = movementEvaluators;
     }
 
-    public void setIllegalMovementEvaluators(Set<MovementEvaluator> illegalMovementEvaluators) {
+    public void setIllegalMovementEvaluators(
+        Set<MovementEvaluator> illegalMovementEvaluators
+    ) {
         this.illegalMovementEvaluators = illegalMovementEvaluators;
     }
 

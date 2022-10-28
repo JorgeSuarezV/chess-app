@@ -2,7 +2,7 @@ package chess.position;
 
 import org.jetbrains.annotations.NotNull;
 
-public class Coordinate implements Comparable<Coordinate>{
+public class Coordinate implements Comparable<Coordinate> {
 
     private final int x;
     private final int y;
@@ -12,7 +12,6 @@ public class Coordinate implements Comparable<Coordinate>{
         this.y = y;
     }
 
-
     public int getX() {
         return x;
     }
@@ -20,7 +19,6 @@ public class Coordinate implements Comparable<Coordinate>{
     public int getY() {
         return y;
     }
-
 
     @Override
     public int compareTo(@NotNull Coordinate o) {

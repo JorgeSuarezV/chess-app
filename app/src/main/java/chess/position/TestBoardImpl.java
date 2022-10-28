@@ -1,21 +1,20 @@
 package chess.position;
 
-import chess.piece.Piece;
-import org.jetbrains.annotations.Nullable;
+import static chess.util.Cloner.cloneBoard;
+import static chess.util.Cloner.clonePositionList;
 
+import chess.piece.Piece;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-
-import static chess.util.Cloner.cloneBoard;
-import static chess.util.Cloner.clonePositionList;
+import org.jetbrains.annotations.Nullable;
 
 public class TestBoardImpl implements TestBoard {
 
     private List<List<Position>> history = new ArrayList<>();
     final int size;
 
-    public TestBoardImpl(int size){
+    public TestBoardImpl(int size) {
         this.size = size;
     }
 
@@ -28,21 +27,28 @@ public class TestBoardImpl implements TestBoard {
         List<Position> positionList = new ArrayList<>();
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
-                positionList.add(new Position(i,j));
+                positionList.add(new Position(i, j));
             }
         }
         return positionList;
     }
 
-    public @Nullable Position getPosition(Coordinate coordinate){
-        List<Position> actualState = new ArrayList<>(history.get(history.size()-1));
+    public @Nullable Position getPosition(Coordinate coordinate) {
+        List<Position> actualState = new ArrayList<>(
+            history.get(history.size() - 1)
+        );
         return getPosition(actualState, coordinate);
     }
 
-    private @Nullable Position getPosition(List<Position> positions, Coordinate coordinate){
+    private @Nullable Position getPosition(
+        List<Position> positions,
+        Coordinate coordinate
+    ) {
         for (Position position : positions) {
-            if (position.getY() == coordinate.getY() && position.getX() == coordinate.getX())
-                return position;
+            if (
+                position.getY() == coordinate.getY() &&
+                position.getX() == coordinate.getX()
+            ) return position;
         }
         return null; // chess.position not in board
     }
@@ -57,10 +63,13 @@ public class TestBoardImpl implements TestBoard {
         return this;
     }
 
-    public void movePiece(Set<Move> moves){
+    public void movePiece(Set<Move> moves) {
         List<Position> actualPositions = getActualPositions();
         for (Move move : moves) {
-            Position fromPosition = getPosition(actualPositions, move.getFrom());
+            Position fromPosition = getPosition(
+                actualPositions,
+                move.getFrom()
+            );
             Position toPostion = getPosition(actualPositions, move.getTo());
             toPostion.setPiece(fromPosition.setPiece(null));
         }
@@ -81,16 +90,17 @@ public class TestBoardImpl implements TestBoard {
     public int getHeight() {
         return size;
     }
+
     @Override
     public int getWidth() {
         return size;
     }
 
-
-
-    public void addPiece(Coordinate coordinate, Piece piece){
-        for (Position position : history.get(history.size()-1)) {
-            if (position.getCoordinate().compareTo(coordinate) == 0) position.setPiece(piece);
+    public void addPiece(Coordinate coordinate, Piece piece) {
+        for (Position position : history.get(history.size() - 1)) {
+            if (
+                position.getCoordinate().compareTo(coordinate) == 0
+            ) position.setPiece(piece);
         }
     }
 

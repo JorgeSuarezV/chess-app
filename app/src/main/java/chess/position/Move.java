@@ -1,6 +1,7 @@
 package chess.position;
 
 public class Move {
+
     private final Coordinate from;
     private final Coordinate to;
 
@@ -12,8 +13,10 @@ public class Move {
     @Override
     public boolean equals(Object obj) {
         Move otherMove = (Move) obj;
-        return this.getFrom().equals(otherMove.getFrom()) &&
-                this.getTo().equals(otherMove.getTo());
+        return (
+            this.getFrom().equals(otherMove.getFrom()) &&
+            this.getTo().equals(otherMove.getTo())
+        );
     }
 
     @Override
